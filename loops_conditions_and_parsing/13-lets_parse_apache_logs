@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #Let's parse Apache logs
 
-log_file="apache-access.log
+log_file="apache-access.log"
 if [ -e "$log_file" ]; then
 
-     awk '{print $1, $9}'"$log_file"
+     awk '{print $1, $9}' "$log_file"
 else
   
      echo "The log file $log_file dose not exist."
