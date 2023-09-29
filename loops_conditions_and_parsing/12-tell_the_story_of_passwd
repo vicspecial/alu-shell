@@ -1,6 +1,16 @@
-#!/usr/bin/bash
-# Displaying the content of the file /etc/passwd
-while IFS=: read -r username password userid groupid comment homedirectory command
+#!/usr/bin/env bash
+# Displaying the content of the file /etc/passwd using the while loop + IFS
+
+# Setting the Internal Field Separator (IFS) to colon (:)
+IFS=":"
+
+# Opening the file /etc/passwd
+while read -r username password uid gid info homedir shell
 do
-    echo "The user $username is part of the $groupid gang, lives in $homedirectory and rides $command shell. User ID's place is protected by the passcode $password, more info about the user here: $comment"
+    echo "The user $username is part of the $gid gang, lives in $homedir and rides $shell."
+    echo "User $uid's place is protected by the passcode $password, more info about the user here: $info"
+    echo
 done < /etc/passwd
+
+# Exiting the script
+exit 0
