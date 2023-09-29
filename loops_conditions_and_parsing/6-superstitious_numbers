@@ -5,21 +5,25 @@ counter=1
 
 while [ $counter -le 20 ]; do
     case $counter in
-        4)
-
-            echo "$counter then bad luck from China"
+	    4)
+            
+		    
+		    echo "$counter bad luck from China"
             ;;
-        9)
-
-            echo "$counter then bad luck from Japan"
+            9)
+            
+		    
+		    echo "$counter bad luck from Japan"
             ;;
-        17)
-
-            echo "$counter then bad luck from Italy"
+            17)
+            
+		    
+		    echo "$counter bad luck from Italy"
             ;;
-        *)
-
-            echo $counter
+            *)
+            
+		    
+		    echo $counter
             ;;
     esac
 
