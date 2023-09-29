@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Displaying the content of the file /etc/passwd using the while loop + IFS
 
-# Setting the Internal Field Separator (IFS) to commas (:)
+# Setting the Internal Field Separator (IFS) to commas
 IFS=":"
 
 # Opening the file /etc/passwd
