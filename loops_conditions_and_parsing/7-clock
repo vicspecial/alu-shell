@@ -1,33 +1,16 @@
 #!/usr/bin/env bash
-#loop
-hour=0
+#nested loop stuff
 
- 
-
-while [ $hour -le 12 ]
-
+hours=0
+minutes=1
+while [ $hours -ne 13 ]
 do
-
-    echo "Hour: $hour"
-
- 
-
-    minute=1
-
- 
-
-        while [ $minute -le 59 ]
-
-    do
-
-        echo $minute
-
-        ((minute++))
-
+    echo "Hour $hours"
+    ((hours++))
+     while [ $minutes -ne 60 ]
+      do
+         echo $minites
+         ((minites++))
     done
-
- 
-
-    ((hour++))
-
-done
+   ((minites=1))
+   done
