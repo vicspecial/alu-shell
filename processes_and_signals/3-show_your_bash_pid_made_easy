@@ -1,0 +1,17 @@
+#!/bin/bash
+#Show your Bash PID made easy
+
+# Get all processes using the /proc filesystem
+processes=$(ls -d /proc/*/)
+
+# Iterate over each process
+for process in $processes; do
+  # Extract the PID from the process path
+  pid=$(basename $process)
+  
+  # Check if the process name contains the word 'bash'
+  name=$(cat $process/status | grep "Name" | awk '{print $2}')
+  if [[ $name == bash ]]; then
+    echo "PID: $pid, Process Name: $name"
+  fi
+done
