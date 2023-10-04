@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#list your processes
+
+# Get the process IDs and their details using the ps command
+processes=$(ps axo pid,ppid,user,%cpu,%mem,start,time,command)
+
+# Print the header for the process list
+printf "%-7s %-7s %-10s %-7s %-7s %-7s %-7s %-s\n" "PID" "PPID" "USER" "%CPU" "%MEM" "START" "TIME" "COMMAND"
+
+# Loop through the processes and print their details
+while read -r process; do
+    # Extract the different fields from the process details
+    pid=$(echo "$process" | awk '{print $1}')
+    ppid=$(echo "$process" | awk '{print $2}')
+    user=$(echo "$process" | awk '{print $3}')
+    cpu=$(echo "$process" | awk '{print $4}')
+    mem=$(echo "$process" | awk '{print $5}')
+    start=$(echo "$process" | awk '{print $6}')
+    time=$(echo "$process" | awk '{print $7}')
+    command=$(echo "$process" | awk '{print $8}')
+
+    # Print the process details with proper formatting
+    printf "%-7s %-7s %-10s %-7s %-7s %-7s %-7s %-s\n" "$pid" "$ppid" "$user" "$cpu" "$mem" "$start" "$time" "$command"
+done <<< "$processes"
