@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
-#List your processes
+# Display a list of currently running processes
 
-# Get the list of all running processes
-processes=$(ps -eo pid,user,ppid,%mem,%cpu,cmd --sort=-%mem | awk '{OFS=","; print $1,$2,$3,$4,$5,$6}')
+# Use the ps command to get information about the processes
+# Use the -e flag to show processes for all users
+# Use the -o flag to specify the format of the output
+# Use the h option to exclude the header line from the output
+# Use the --forest option to show the process hierarchy
 
-# Print the header
-printf "%-7s %-10s %-10s %-7s %-7s %-s\n" "PID" "USER" "PPID" "%MEM" "%CPU" "COMMAND"
-
-# Loop through each process
-while IFS=',' read -r pid user ppid mem cpu cmd; do
-  # Print process details
-  printf "%-7s %-10s %-10s %-7s %-7s %-s\n" "$pid" "$user" "$ppid" "$mem" "$cpu" "$cmd"
-done <<< "$processes"
+ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command --forest | head -50
