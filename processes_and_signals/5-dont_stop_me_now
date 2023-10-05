@@ -13,4 +13,4 @@ else
     echo "Process not found"
 fi
 
-Save the above script in a file named "stop_4_to_infinity_and_beyond.sh". Then, you can run the script in terminal #1 by typing "./stop_4_to_infinity_and_beyond.sh". This will terminate the 4-to_infinity_and_beyond process running in terminal #0.
+#1 by typing "./stop_4_to_infinity_and_beyond.sh". 
