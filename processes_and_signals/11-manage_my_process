@@ -1,69 +1,61 @@
 #!/usr/bin/env bash
-# Bash script to manage the manage_my_process program
+# This Bash script manages the manage_my_process script by starting, stopping, or restarting it.
+# The manage_my_process script writes "I am alive!" to the file /tmp/my_process every 2 seconds.
 
-# Function to start the manage_my_process program
-start() {
-    # Check if the program is already running
-    if [ -f "/var/run/my_process.pid" ]; then
-        echo "manage_my_process is already running."
-        return 1
+# Check if an argument is provided
+if [[ $# -eq 0 ]]; then
+    echo "Usage: manage_my_process {start|stop|restart}"
+    exit 1
+fi
+
+# Path to the manage_my_process script
+MANAGE_SCRIPT="/path/to/manage_my_process"
+
+# Path to the PID file
+PID_FILE="/var/run/my_process.pid"
+
+# Function to start the manage_my_process script
+start_process() {
+    if [[ -f $PID_FILE ]]; then
+        echo "Error: manage_my_process is already running."
+    else
+        nohup $MANAGE_SCRIPT >/dev/null 2>&1 &
+        echo $! > $PID_FILE
+        echo "manage_my_process started"
     fi
-    
-    # Start the manage_my_process program
-    nohup ./manage_my_process > /tmp/my_process 2>&1 &
-    
-    # Get the PID of the program
-    pid=$!
-    
-    # Save the PID to a file
-    echo $pid > "/var/run/my_process.pid"
-    
-    echo "manage_my_process started."
 }
 
-# Function to stop the manage_my_process program
-stop() {
-    # Check if the program is running
-    if [ ! -f "/var/run/my_process.pid" ]; then
-        echo "manage_my_process is not running."
-        return 1
+# Function to stop the manage_my_process script
+stop_process() {
+    if [[ -f $PID_FILE ]]; then
+        PID=$(cat $PID_FILE)
+        kill $PID
+        rm $PID_FILE
+        echo "manage_my_process stopped"
+    else
+        echo "Error: manage_my_process is not running."
     fi
-    
-    # Read the PID from the file
-    pid=$(cat "/var/run/my_process.pid")
-    
-    # Kill the program
-    kill $pid
-    
-    # Remove the PID file
-    rm "/var/run/my_process.pid"
-    
-    echo "manage_my_process stopped."
 }
 
-# Function to restart the manage_my_process program
-restart() {
-    # Stop the program
-    stop
-    
-    # Start the program
-    start
-    
-    echo "manage_my_process restarted."
+# Function to restart the manage_my_process script
+restart_process() {
+    stop_process
+    start_process
+    echo "manage_my_process restarted"
 }
 
-# Check the command line arguments
+# Check the argument passed
 case $1 in
     start)
-        start
+        start_process
         ;;
     stop)
-        stop
+        stop_process
         ;;
     restart)
-        restart
+        restart_process
         ;;
     *)
         echo "Usage: manage_my_process {start|stop|restart}"
-        ;;
+        exit 1
 esac
