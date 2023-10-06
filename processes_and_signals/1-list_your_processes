@@ -5,6 +5,4 @@
 # Use the -e flag to show processes for all users
 # Use the -o flag to specify the format of the output
 # Use the h option to exclude the header line from the output
-# Use the --forest option to show the process hierarchy
-
-ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command --forest | head -50
+# Use the --forest option to show the process
