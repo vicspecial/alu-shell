@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Display a list of currently running processes
+# Bash script to display a list of currently running processes, including process hierarchy
 
-# Use the ps command to get information about the processes
-# Use the -e flag to show processes for all users
-# Use the -o flag to specify the format of the output
-# Use the h option to exclude the header line from the output
-# Use the --forest option to show the process
+# Use the ps command with options to show all processes, for all users, including those without a TTY
+# Format the output with headers
+# Use the --forest option to display the process hierarchy
+ps auxf | head -1
+ps auxf | tail -n +2 | sort -rn -k4
+
+# End of the script
